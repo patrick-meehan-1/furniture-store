@@ -1,12 +1,14 @@
 {% extends 'base.html' %}
+{% block title %} DIY Tips and Tricks{% endblock  %}
 
 
 {% block content %}
-<h1>DIY Tips and Advice</h1>
+<h1>DIY Tips and Tricks</h1>
 
-<ul>
     {% for post in all_posts_list %}
-    <li>{{ post.text }}</li>
+    <div class="post-entry">
+    <h2><a href="">{{ post.title }}</h2></a>
+    <p>{{ post.body }}</p>
+    </div>
     {% endfor %}
-</ul>
 {% endblock content %}
