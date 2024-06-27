@@ -6,12 +6,20 @@
         <h2>{{post.title}}</h2>
         <h4>{{post.author.username}}</h4>
         <p>{{post.body}}</p>
+        <p><a href={% url 'post_edit' post.pk %}>+ Edit Post</a></p>
+        <p><a href={% url 'post_delete' post.pk %}>- Delete Post</a></p>
         <a href={% url 'posts' %}>Go Back</a>
         <p>Categorie(s): </p>
         {% for category in post.category.all %}
             <p>{{ category.name }}<p>
         {% endfor %}
+
+        {% for comment in post.comments.all %}
+        <p>
+            <span class="fw-bold">{{ comment.author }} &middot; </span>
+            {{ comment }}
+        <p>
+            {% endfor %}
+
     </div>
-    <p><a href={% url 'post_edit' post.pk %}>+ Edit Post</a></p>
-    <p><a href={% url 'post_delete' post.pk %}>- Delete Post</a></p>
     {% endblock content %}
