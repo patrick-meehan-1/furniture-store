@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}Edit Profile{% endblock title %}
+{% block content %}
+
+{% if user.is_authenticated %}
+ <h1>Edit Profile</h1>
+
+ <form method="POST">
+ {% csrf_token %}
+ {{ form|crispy }}
+ <input class="btn btn-success" type="submit" value="Update Profile">
+ </form>
+
+ {% else %}
+ <p>You can't edit this profile!</p>
+ {% endif %}
+{% endblock content %}
