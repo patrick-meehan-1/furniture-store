@@ -1,12 +1,17 @@
 from django.db import models
 from django.urls import reverse
 from django.contrib.auth import get_user_model
+import uuid
 
 
 
 # Create your models here.
 
 class Category(models.Model):
+    id = models.UUIDField(primary_key=True,
+                          default=uuid.uuid4,
+                          editable=False)
+    
     name = models.CharField(max_length=50)
     description = models.TextField()
 
@@ -14,6 +19,10 @@ class Category(models.Model):
         return self.name
 
 class Post(models.Model):
+    id = models.UUIDField(primary_key=True,
+                          default=uuid.uuid4,
+                          editable=False)
+    
     title = models.CharField(max_length=200)
     author = models.ForeignKey(
         'accounts.CustomUser',
@@ -29,6 +38,10 @@ class Post(models.Model):
         return reverse('post_detail', args=[str(self.id)])
 
 class Comment(models.Model):
+    id = models.UUIDField(primary_key=True,
+                          default=uuid.uuid4,
+                          editable=False)
+    
     article = models.ForeignKey(
         Post,
         on_delete=models.CASCADE,

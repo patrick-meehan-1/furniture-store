@@ -2,14 +2,21 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.contrib.auth import get_user_model
 from django.urls import reverse
+import uuid
 
 # Create your models here.
 
 class CustomUser(AbstractUser):
+    id = models.UUIDField(primary_key=True,
+                          default=uuid.uuid4,
+                          editable=False)
     age = models.PositiveBigIntegerField(null=True, blank=True)
 
 
 class Profile(models.Model):
+    id = models.UUIDField(primary_key=True,
+                          default=uuid.uuid4,
+                          editable=False)
     user = models.OneToOneField(
         get_user_model(),
         null=True,
