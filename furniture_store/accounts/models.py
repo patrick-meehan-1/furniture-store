@@ -3,6 +3,8 @@ from django.contrib.auth.models import AbstractUser
 from django.contrib.auth import get_user_model
 from django.urls import reverse
 import uuid
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 # Create your models here.
 
@@ -33,3 +35,10 @@ class Profile(models.Model):
     
     def get_absolute_url(self):
         return reverse("show_profile", args=[str(self.id)])
+
+@receiver(post_save, sender=CustomUser)
+def create_or_update_user_profile(sender, instance, created, **kwargs):
+    if created:
+        Profile.objects.create(user=instance)
+    else:
+        instance.profile.save()

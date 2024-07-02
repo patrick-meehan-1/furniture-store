@@ -11,7 +11,7 @@ class SignUpView(CreateView):
 class ProfileEditView(UpdateView):
     model = Profile
     template_name = 'registration/edit_profile.html'
-    fields = ['name', 'bio', 'fav_color']
+    fields = ['name', 'profile_pic', 'bio', 'fav_color']
 
 class ProfilePageView(DetailView):
     model = Profile
