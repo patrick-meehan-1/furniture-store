@@ -26,6 +26,7 @@ class Profile(models.Model):
     name = models.CharField(max_length=255)
     bio = models.CharField(max_length=255)
     fav_color = models.CharField(max_length=255)
+    profile_pic = models.ImageField(upload_to='profile_pic/', null=True)
 
     def __str__(self):
         return str(self.user)

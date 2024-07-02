@@ -3,6 +3,11 @@
 
 {% block content %}
 <h1>{{ user.profile.name }}</h1>
+
+{% if user.profile.profile_pic %}
+    <img class="profile_pic" src="{{ user.profile.profile_pic.url }}" alt = "Profile Picture">
+{% endif %}
+
 <h2>{{ user.profile.bio }}</h2>
 <h3>{{ user.profile.fav_color }}</h3>
 
