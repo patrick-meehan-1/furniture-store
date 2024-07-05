@@ -1,8 +1,10 @@
+from django.db.models.query import QuerySet
 from django.views.generic import ListView, DetailView
 from django.views.generic import CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from .models import Post
 from django.urls import reverse_lazy
+from django.db.models import Q
 
 
 class PostPageView(LoginRequiredMixin, ListView):
@@ -39,3 +41,14 @@ class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin,  DeleteView):
     def test_func(self):
         obj = self.get_object()
         return obj.author == self.request.user
+    
+class SearchResultsListView(ListView):
+    model = Post
+    context_object_name = 'post_list'
+    template_name = 'search_results.html'
+
+    def get_queryset(self):
+        query = self.request.GET.get('q')
+        return Post.objects.filter(
+            Q(title__icontains=query) | Q(body__icontains=query)
+        )
