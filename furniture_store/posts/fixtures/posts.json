@@ -1,1 +1,37 @@
-[{"model": "posts.category", "pk": "99f92c5a-5e64-4606-9a0d-f3dbcc968af5", "fields": {"name": "Painting", "description": "dfgfge44gfgdfg"}}, {"model": "posts.post", "pk": "52a91bfb-023e-4489-a4f6-74b1e4c202a2", "fields": {"title": "I love decorating", "author": "2ace1d15-506a-47c1-ae79-4135e5bc560f", "body": "paint", "category": ["99f92c5a-5e64-4606-9a0d-f3dbcc968af5"]}}, {"model": "posts.post", "pk": "ccd7a3c1-720f-4400-8f14-cd6cd9efec12", "fields": {"title": "Painting Tip 101", "author": "fe759292-8a8b-4823-bf28-f2b83f248f1e", "body": "I love painting blosidaisdabsdasdihaspid\r\nasoidas0pibfpsafd", "category": ["99f92c5a-5e64-4606-9a0d-f3dbcc968af5"]}}, {"model": "posts.post", "pk": "f6c35774-ec0d-452f-b6fc-4ff8035e6c56", "fields": {"title": "200", "author": "2ace1d15-506a-47c1-ae79-4135e5bc560f", "body": "fgdfgdfg", "category": ["99f92c5a-5e64-4606-9a0d-f3dbcc968af5"]}}]
+[
+  {
+    "model": "posts.category",
+    "pk": "99f92c5a-5e64-4606-9a0d-f3dbcc968af5",
+    "fields": { "name": "Painting", "description": "dfgfge44gfgdfg" }
+  },
+  {
+    "model": "posts.post",
+    "pk": "52a91bfb-023e-4489-a4f6-74b1e4c202a2",
+    "fields": {
+      "title": "I love decorating",
+      "author": "2ace1d15-506a-47c1-ae79-4135e5bc560f",
+      "body": "paint",
+      "category": ["99f92c5a-5e64-4606-9a0d-f3dbcc968af5"]
+    }
+  },
+  {
+    "model": "posts.post",
+    "pk": "ccd7a3c1-720f-4400-8f14-cd6cd9efec12",
+    "fields": {
+      "title": "Painting Tip 101",
+      "author": "fe759292-8a8b-4823-bf28-f2b83f248f1e",
+      "body": "I love painting blosidaisdabsdasdihaspid\r\nasoidas0pibfpsafd",
+      "category": ["99f92c5a-5e64-4606-9a0d-f3dbcc968af5"]
+    }
+  },
+  {
+    "model": "posts.post",
+    "pk": "f6c35774-ec0d-452f-b6fc-4ff8035e6c56",
+    "fields": {
+      "title": "200",
+      "author": "2ace1d15-506a-47c1-ae79-4135e5bc560f",
+      "body": "fgdfgdfg",
+      "category": ["99f92c5a-5e64-4606-9a0d-f3dbcc968af5"]
+    }
+  }
+]
