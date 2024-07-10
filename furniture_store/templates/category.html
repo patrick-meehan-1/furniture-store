@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% load static %}
+{% block metadescription %}
+ {% if category %}
+ {{ category.description|truncatewords:155 }}
+ {% else %}
+ Welcome to Happy Panda, where you find everything for your little pal!
+ {% endif %}
+{% endblock %}
+{% block title %}
+ {% if category %}
+ {{ category.name }} - Happy Panda Pet Store
+ {% else %}
+ See Our Pet Supplies - Happy Panda
+ {% endif %}
+{% endblock %}
+{% block content %}
+ <!--Breadcrumb navigation-->
+ {% if category %}
+ <div class="row my_row_class">
+ <div class="mx-auto">
+ <p><a href="{% url 'all_products' %}">Furniture Products</a> | {{category.name}}</p>
+ </div>
+ </div>
+ {% endif %}
+ <div class="mx-auto">
+ {% if category %}
+ <img class="card_img " src="{{category.image.url}}" alt="{{category.name}}">
+ </div>
+ <br>
+ <div>
+ <h1 class="text-center cat_title">{{category.name}}</h1>
+ <p class="test-justify">{{category.description}}</p>
+ </div>
+ {% else %}
+ <a href=" {% url 'all_products' %} "><img class="banner_img cat_image cat_image_padding" src="{% static 'images/banner.jpg' %}" alt="Our Products Collection"></a>
+ </div>
+ <br>
+ <div>
+ <h1 class="text-center cat_title">Furniture Products</h1>
+ <p class="text-justify"></p>
+ </div>
+ {% endif %}
+ <div class="container">
+<div class="row mx-auto">
+{% for product in prods %}
+<div class="my_bottom_margin col-9 col-lg-4 col-sm-12 col-md-4">
+<div class="card text-center" style="min-width:18rem;">
+<a class ="img" href="{{product.get_absolute_url}}"><img class="card-img-top my_image"src="{{product.image.url}}" alt="{{product.name}}"></a>
+<div class="card-box card-body">
+
+ <h4>{{product.name}}</h4>
+ <p>€{{product.price}}</p>
+ </div>
+ </div>
+ </div>
+ {% endfor %}
+ </div>
+ <br>
+ </div>
+{% endblock %}

@@ -8,3 +8,29 @@ body {
     font-family: 'Source Sans Pro', sans-serif;
     font-size: 18px;
 }
+
+
+/****Category page****/
+
+.cat_image {
+    width: 100%;
+    height: auto;
+    margin: 2em;
+    border-radius: 2em;
+    box-shadow: 0 0 3px #FF0000, 0 0 5px #0000FF;
+}
+
+.cat_image:hover {
+    box-shadow: 0 0 3px #e0e3e4, 0 0 5px #b300ff;
+}
+
+.cat_title {
+    letter-spacing: .1em;
+    font-size: 30px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.banner_img {
+    box-shadow: 0 0 3px #FF0000, 0 0 5px #0000FF;
+}

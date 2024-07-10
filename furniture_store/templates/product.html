@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% load static %}
+{% load crispy_forms_tags%}
+{% block metadescription %}
+ {{ product.description|truncatewords:155 }}
+{% endblock %}
+{% block title %}
+ {{ product.name }} - Furniture Store
+{% endblock %}
+{% block content %}
+
+
+ <div class = "row my_prod_row_class">
+ <div class = "mx-auto">
+ <p><a class = "a_hover_color" href="{% url 'all_products' %}">Home</a> | <a class = "a_hover_color" href="{{product.category.get_url }}">{{product.category}}</a> | {{product.name}}</p>
+ </div>
+ <div class="container">
+ <br>
+ <div class="row">
+ <div class="col-12 col-sm-12 col-md-12 col-lg-6 text-center">
+ <div class="mid-width: 18rem;">
+ <img class="prod_img" src="{{product.image.url}}" alt="{{product.name}}">
+ </div>
+ </div>
+ <div class="col-12 col-sm-12 col-md-12 col-lg-6">
+ <div class="left-pad">
+ <h1 class="my_prod_title">{{product.name}}</h1>
+ <h2>€{{product.price}}</h2>
+ <br>
+ <h5 class="my_title">Product Description</h5>
+ <p class="text-justify my_prod_text">{{product.description}}</p>
+ </div>
+ </div>
+ </div>
+ </div>
+ </div>
+{% endblock %}
