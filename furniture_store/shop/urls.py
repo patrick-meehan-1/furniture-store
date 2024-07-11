@@ -8,6 +8,7 @@ urlpatterns = [
     path('<uuid:category_id>/', views.prod_list, name='products_by_category'),
     path('about/', AboutPageView.as_view(), name='about'),
     path('contact/', ContactPageView.as_view(), name='contact'),
-     path('<uuid:category_id>/<uuid:product_id>/', views.product_detail, name = 'product_detail'),
+    path('<uuid:category_id>/<uuid:product_id>/', views.product_detail, name = 'product_detail'),
+    path('search/', SearchProductsListView.as_view(), name='searchResult'),
 
 ]

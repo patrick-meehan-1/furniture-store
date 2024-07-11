@@ -42,7 +42,7 @@ class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin,  DeleteView):
         obj = self.get_object()
         return obj.author == self.request.user
     
-class SearchResultsListView(ListView):
+class SearchPostsListView(ListView):
     model = Post
     context_object_name = 'post_list'
     template_name = 'search_results.html'

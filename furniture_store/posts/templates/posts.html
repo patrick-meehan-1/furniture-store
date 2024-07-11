@@ -4,6 +4,11 @@
 
 {% block content %}
 <h1>DIY Tips and Tricks</h1>
+<form class="d-flex" action="{% url 'search_results' %}" method = "get">
+    <input name= "q" class="form-control me-2" type="search" aria-label="Search">
+    <button class="btn btn-outline-success" type="submit">Search</button>
+  </form>
+  <br>
 
     {% for post in all_posts_list %}
     <div class="card">

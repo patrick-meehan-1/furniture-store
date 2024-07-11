@@ -15,7 +15,7 @@ body {
 .cat_image {
     width: 100%;
     height: auto;
-    margin: 2em;
+    margin-top: 2em;
     border-radius: 2em;
     box-shadow: 0 0 3px #FF0000, 0 0 5px #0000FF;
 }

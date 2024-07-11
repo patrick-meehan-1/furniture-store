@@ -7,6 +7,6 @@ urlpatterns = [
     path('post/new/', PostCreateView.as_view(), name='post_new'),
     path('post/<uuid:pk>/edit/', PostUpdateView.as_view(), name='post_edit'),
     path('post/<uuid:pk>/delete/', PostDeleteView.as_view(), name='post_delete'),
-    path('search/', SearchResultsListView.as_view(), name='search_results'),
+    path('search/', SearchPostsListView.as_view(), name='search_results'),
 
 ]
