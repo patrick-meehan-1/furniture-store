@@ -29,6 +29,12 @@
  <br>
  <h5 class="my_title">Product Description</h5>
  <p class="text-justify my_prod_text">{{product.description}}</p>
+ {% if product.stock == 0%}
+    <p><b>Out of Stock</b></p>
+    {% else %}
+    <a class="cart-button btn btn-secondary" href="{% url 'cart:add_cart' product.id %}">Add to Cart</a>
+    {% endif %}
+    <br>
  </div>
  </div>
  </div>
