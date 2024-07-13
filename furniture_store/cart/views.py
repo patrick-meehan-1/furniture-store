@@ -2,6 +2,8 @@ from django.shortcuts import redirect, render, get_object_or_404
 from shop.models import Product
 from .models import Cart, CartItem
 from django.core.exceptions import ObjectDoesNotExist
+from django.conf import settings
+import stripe
 
 def _cart_id(request):
     cart = request.session.session_key
@@ -34,8 +36,27 @@ def cart_detail(request, total=0, counter=0, cart_items=None):
             counter += cart_item.quantity
     except ObjectDoesNotExist:
         pass
-    return render(request, 'cart.html', {'cart_items':cart_items, 'total': total, 
-                                         'counter': counter})
+    stripe.api_key = settings.STRIPE_SECRET_KEY
+    stripe_total = int(total*100)
+    description = 'Online Shop - New Order'
+    data_key = settings.STRIPE_PUBLISHABLE_KEY
+    if request.method == 'POST':
+        print(request.POST)
+        try:
+            token = request.POST['stripeToken']
+            email = request.POST['stripeEmail']
+            customer = stripe.Customer.create(email=email,
+                                            source=token)
+            stripe.Charge.create(amount=stripe_total,
+                                 currency="eur",
+                                 description=description,
+                                 customer=customer.id)
+        except stripe.error.CardError as e:
+            return e
+
+
+    return render(request, 'cart.html', {'cart_items':cart_items, 'total': total, 'counter': counter,
+                                         'data_key': data_key, 'stripe_total': stripe_total, 'description': description})
 
 def cart_remove(request, product_id):
     cart= Cart.objects.get(cart_id=_cart_id(request))

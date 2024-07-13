@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     #3rd Party
     'crispy_forms',
     'crispy_bootstrap5',
+    'stripe',
 ]
 
 MIDDLEWARE = [
@@ -149,3 +150,8 @@ AUTH_USER_MODEL = 'accounts.CustomUser'
 CRISPY_TEMPLATE_PACK = 'bootstrap5'
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+
+# STRIPE KEYS
+STRIPE_SECRET_KEY = 'sk_test_51Pc6bqEFX5HYk4H3dxzR83yZlyw4jXVfvDOtUCOfW5jpEW6HFyGoeEIL3OG2TrkXMAmaouDgNqYd0cIVOIjX9wmJ00ayBvu5bt'
+STRIPE_PUBLISHABLE_KEY = 'pk_test_51Pc6bqEFX5HYk4H3AUJu4jpzpMY4XsYSDYEFscDWaqpwTqe8hsw4oN9JkEqOqsU0k7ElbqWWfmEQMr5OcsLRxxVM006i4nNDFH'
