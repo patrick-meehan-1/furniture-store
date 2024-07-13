@@ -1,5 +1,6 @@
 from django.shortcuts import redirect, render, get_object_or_404
 from shop.models import Product
+from order.models import Order, OrderItem
 from .models import Cart, CartItem
 from django.core.exceptions import ObjectDoesNotExist
 from django.conf import settings
@@ -45,12 +46,55 @@ def cart_detail(request, total=0, counter=0, cart_items=None):
         try:
             token = request.POST['stripeToken']
             email = request.POST['stripeEmail']
+            billingName = request.POST['stripeBillingName']
+            billingAddress1 = request.POST['stripeBillingAddressLine1']
+            billingcity = request.POST['stripeBillingAddressCity']
+            billingCountry = request.POST['stripeBillingAddressCountryCode']
+            shippingName = request.POST['stripeShippingName']
+            shippingAddress1 = request.POST['stripeShippingAddressLine1']
+            shippingcity = request.POST['stripeShippingAddressCity']
+            shippingCountry = request.POST['stripeShippingAddressCountryCode']
             customer = stripe.Customer.create(email=email,
                                             source=token)
             stripe.Charge.create(amount=stripe_total,
                                  currency="eur",
                                  description=description,
                                  customer=customer.id)
+            '''Creating the order'''
+            try:
+                order_details = Order.objects.create(
+                    token = token,
+                    total = total,
+                    emailAddress = email,
+                    billingName = billingName,
+                    billingAddress1 = billingAddress1,
+                    billingCity = billingcity,
+                    billingCountry = billingCountry,
+                    shippingName = shippingName,
+                    shippingAddress1 = shippingAddress1,
+                    shippingCity = shippingcity,
+                    shippingCountry = shippingCountry
+                )
+                order_details.save()
+                for order_item in cart_items:
+                    oi = OrderItem.objects.create(
+                        product = order_item.product.name,
+                        quantity = order_item.quantity,
+                        price = order_item.product.price,
+                        order = order_details)
+                    oi.save
+                    '''Reduce stock when order is placed or saved'''
+                    products = Product.objects.get(id=order_item.product.id)
+                    products.stock = int(order_item.product.stock -
+                    order_item.quantity)
+                    products.save()
+                    order_item.delete()
+                    '''The terminal will print this message when the order is saved'''
+                    print('The order has been created')
+                return redirect ('all_products')
+            except ObjectDoesNotExist:
+                pass
+
         except stripe.error.CardError as e:
             return e
 
