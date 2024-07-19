@@ -93,11 +93,49 @@ Checkout
 Please review your shopping cart items before proceeding with the order payment.
 </td>
 </tr>
+{% if voucher %}
+ <tr class="subtotal">
+ <td>Total</td>
+ <td colspan="4"></td>
+ <td class="num">€{{ total|floatformat:"2" }}</td>
+ </tr>
 <tr>
-<td class="text-left">
-Your total is: <strong>€{{ total }}</strong>
+ <td>
+"{{ voucher.code }}" voucher
+({{ voucher.discount }}% off)
 </td>
-</tr>
+<td colspan="4"></td>
+ <td class="num neg">
+ - €{{ discount|floatformat:"2" }}
+ </td>
+ </tr>
+<tr class="total">
+ <td>Total</td>
+ <td colspan="4"></td>
+ <td class="num">
+ €{{ new_total|floatformat:"2" }}
+ </td>
+ </tr>
+{% else %}
+ <tr class="total">
+ <td>Total</td>
+ <td colspan="4"></td>
+ <td class="num">
+ €{{ total|floatformat:"2" }}
+ </td>
+ </tr>
+11
+ {% endif %}
+ </tbody>
+ </table>
+ <p>Apply a voucher:</p>
+ <form action="{% url 'vouchers:apply' %}" method="post">
+ {{ voucher_apply_form }}
+<input type="submit" value="Apply">
+ {% csrf_token %}
+</form>
+
+
 </tbody>
 </table>
 <form action="" method="POST">

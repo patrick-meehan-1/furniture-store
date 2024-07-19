@@ -1,4 +1,6 @@
 from django.db import models
+from django.core.validators import MinValueValidator, MaxValueValidator
+from vouchers.models import Voucher
 
 # Create your models here.
 class Order(models.Model):
@@ -18,6 +20,14 @@ class Order(models.Model):
     shippingCity = models.CharField(max_length=250, blank=True)
     shippingPostcode = models.CharField(max_length=10, blank=True)
     shippingCountry = models.CharField(max_length=200, blank=True)
+    voucher = models.ForeignKey(Voucher,
+                                related_name='orders',
+                                null=True,
+                                blank=True,
+                                on_delete=models.SET_NULL)
+    discount = models.IntegerField(default = 0,
+                                validators=[MinValueValidator(0),
+                                MaxValueValidator(100)])
     
     class Meta:
        db_table = 'Order'
