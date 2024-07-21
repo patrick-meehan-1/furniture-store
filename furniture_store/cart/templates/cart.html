@@ -44,8 +44,10 @@ Your items
 {% for cart_item in cart_items %}
 <tr>
 <td>
+    {% if product.image %}
 <a href="{{cart_item.product.get_url}}"><img src="{{cart_item.product.image.url}}"
  alt="" class="float-left rounded custom_image"></a>
+ {% endif %}
 </td>
 <td class="text-left">
 {{cart_item.product.name}}

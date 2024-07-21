@@ -11,7 +11,7 @@ class Cart(models.Model):
         db_table = 'Cart'
         ordering = ['date_added']
     
-    def __str_(self):
+    def __str__(self):
         return self.cart_id
     
     

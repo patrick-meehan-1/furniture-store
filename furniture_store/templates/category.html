@@ -25,7 +25,9 @@
  {% endif %}
  <div class="mx-auto">
  {% if category %}
+   {% if category.image %}
  <img class="card_img " src="{{category.image.url}}" alt="{{category.name}}">
+   {% endif %}
  </div>
  <br>
  <div>
@@ -46,9 +48,10 @@
 {% for product in prods %}
 <div class="my_bottom_margin col-9 col-lg-4 col-sm-12 col-md-4">
 <div class="card text-center" style="min-width:18rem;">
+   {% if product.image %}
 <a class ="img" href="{{product.get_absolute_url}}"><img class="card-img-top my_image"src="{{product.image.url}}" alt="{{product.name}}"></a>
+   {% endif %}
 <div class="card-box card-body">
-
  <h4>{{product.name}}</h4>
  <p>€{{product.price}}</p>
  </div>
