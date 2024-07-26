@@ -92,6 +92,7 @@ crossorigin="anonymous">
             <form class="d-flex" action="{% url 'searchResult' %}" method = "get">
               <input name= "q" class="form-control me-2" type="search" aria-label="Search">
               <button class="btn btn-outline-success" type="submit">Search</button>
+              <a class="btn btn-outline-secondary" href="{% url 'filter_search' %}">Advanced Search</a>
             </form>
           </div>
         </div>
