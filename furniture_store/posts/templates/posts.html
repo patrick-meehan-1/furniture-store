@@ -20,6 +20,7 @@
             {{ post.body }}
         </div>
         <div class="card-footer  text-muted">
+            <a href="{% url 'add_comment' post.pk %}">Comment</a>
             <a href="{% url 'post_edit' post.pk %}">Edit</a>
             <a href="{% url 'post_delete' post.pk %}">Delete</a>
         </div>

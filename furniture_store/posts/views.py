@@ -2,7 +2,9 @@ from django.db.models.query import QuerySet
 from django.views.generic import ListView, DetailView
 from django.views.generic import CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-from .models import Post
+from .models import Post, Comment
+from .forms import CommentForm
+from django.shortcuts import get_object_or_404, render, redirect
 from django.urls import reverse_lazy
 from django.db.models import Q
 
@@ -52,3 +54,21 @@ class SearchPostsListView(ListView):
         return Post.objects.filter(
             Q(title__icontains=query) | Q(body__icontains=query)
         )
+
+def add_comment(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+    form = CommentForm(request.POST)
+    if form.is_valid():
+        author = request.user
+        comment = form.cleaned_data['comment']
+        commentObject = Comment(post=post, comment=comment, author=author)
+        commentObject.save()
+        
+        return redirect('posts')
+    
+    form = CommentForm()
+    context = {
+        "post":post,
+        "form":form
+    }
+    return render(request, 'comment_new.html', context)

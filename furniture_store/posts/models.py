@@ -42,7 +42,7 @@ class Comment(models.Model):
                           default=uuid.uuid4,
                           editable=False)
     
-    article = models.ForeignKey(
+    post = models.ForeignKey(
         Post,
         on_delete=models.CASCADE,
         related_name = 'comments',
@@ -57,5 +57,5 @@ class Comment(models.Model):
         return self.comment
     
     def get_absolute_url(self):
-        return reverse('post_list')
+        return reverse('posts')
     
