@@ -4,6 +4,8 @@ from django.urls import reverse_lazy
 from .models import Category, Product
 from django.core.paginator import Paginator, EmptyPage, InvalidPage
 from django.db.models.query import QuerySet
+from django.views.generic.edit import *
+from django.contrib.auth.mixins import PermissionRequiredMixin
 
 from django.views.generic import ListView
 from .models import Product, Category
@@ -118,3 +120,10 @@ def filterview(request):
         'categories': categories
         }
     return render(request, 'adv_search.html', context)
+
+# Add a new Product
+class ProductCreateView(PermissionRequiredMixin, CreateView):
+    permission_required = 'products.add_product'
+    model = Product
+    fields = ('name', 'description', 'category', 'price', 'image', 'stock', 'available')
+    template_name = 'product_new.html'

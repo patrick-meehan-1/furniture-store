@@ -11,5 +11,6 @@ urlpatterns = [
     path('<uuid:category_id>/<uuid:product_id>/', views.product_detail, name = 'product_detail'),
     path('search/', SearchProductsListView.as_view(), name='searchResult'),
     path('adv_search/', views.filterview, name='filter_search'),
+    path('new/', ProductCreateView.as_view(), name='product_create'),
 
 ]
