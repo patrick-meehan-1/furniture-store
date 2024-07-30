@@ -40,8 +40,8 @@ def prod_list(request, category_id=None):
 
     return render(request, 'category.html', {'category': category, 'prods': products})
 
-def product_detail(request, category_id, product_id):
-    product = get_object_or_404(Product, category_id=category_id, id=product_id)
+def product_detail(request, category_id, product_id, slug):
+    product = get_object_or_404(Product, category_id=category_id, id=product_id, slug=slug)
     return render(request, 'product.html', {'product': product})
 
 class SearchProductsListView(ListView):
