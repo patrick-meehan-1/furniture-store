@@ -11,6 +11,7 @@ class PostAdmin(admin.ModelAdmin):
     inlines = [
         CommentInline
     ]
+    prepopulated_fields = {'slug': ('title',)}
 
 
 

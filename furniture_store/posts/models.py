@@ -2,6 +2,7 @@ from django.db import models
 from django.urls import reverse
 from django.contrib.auth import get_user_model
 import uuid
+from django.utils.text import slugify
 
 
 
@@ -30,12 +31,17 @@ class Post(models.Model):
     )
     body = models.TextField()
     category = models.ManyToManyField(Category)
+    slug = models.SlugField(null=True, unique=True)
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.title)
+        super(Post, self).save(*args, **kwargs)
 
     def __str__(self):
         return self.title[:50]
     
     def get_absolute_url(self):
-        return reverse('post_detail', args=[str(self.id)])
+        return reverse('post_detail', args=[str(self.id), self.slug])
 
 class Comment(models.Model):
     id = models.UUIDField(primary_key=True,
