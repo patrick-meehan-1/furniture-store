@@ -1,12 +1,12 @@
 from django.views.generic import TemplateView
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import redirect, render, get_object_or_404
 from django.urls import reverse_lazy
-from .models import Category, Product
+from .models import Category, Product, Review
 from django.core.paginator import Paginator, EmptyPage, InvalidPage
 from django.db.models.query import QuerySet
 from django.views.generic.edit import *
 from django.contrib.auth.mixins import PermissionRequiredMixin
-
+from .forms import ReviewForm
 from django.views.generic import ListView
 from .models import Product, Category
 from django.db.models import Q
@@ -127,3 +127,24 @@ class ProductCreateView(PermissionRequiredMixin, CreateView):
     model = Product
     fields = ('name', 'description', 'category', 'price', 'image', 'stock', 'available')
     template_name = 'product_new.html'
+
+def add_review(request, category_id, product_id):
+    product = get_object_or_404(Product, id=product_id, category_id=category_id)
+    
+    if request.method == 'POST':
+        form = ReviewForm(request.POST)
+        if form.is_valid():
+            author = request.user
+            review = form.cleaned_data['review']
+            rating = form.cleaned_data['rating']
+            reviewObject = Review(product=product, review=review, author=author, rating=rating)
+            reviewObject.save()
+            return redirect('product_detail', category_id=category_id, product_id=product_id, slug=product.slug)
+    else:
+        form = ReviewForm()
+    
+    context = {
+        "product": product,
+        "form": form
+    }
+    return render(request, 'new_review.html', context)

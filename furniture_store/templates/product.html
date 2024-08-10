@@ -37,6 +37,18 @@
     <a class="cart-button btn btn-secondary" href="{% url 'cart:add_cart' product.id %}">Add to Cart</a>
     {% endif %}
     <br>
+    {# ADD REVIEW  #}
+{% if request.user.is_authenticated %}
+<h1 class="h1-review">Leave a Review</h1>
+<br>
+<a class = "cart-button btn btn-secondary a_hover_color" href="{% url 'add_review' product.category.id product.id %}">Review</a>
+{% endif %}
+{# OTHER REVIEWS #}
+{% for review in product.reviews.all %}
+<p class="fst-italic">
+<span class="fw-bold">&middot;{{ review.author }}</span>
+"{{ review }}" {{review.rating}}/5 STARS</p>
+{% endfor %}
  </div>
  </div>
  </div>

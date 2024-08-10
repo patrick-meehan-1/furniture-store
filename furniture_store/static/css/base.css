@@ -1,7 +1,7 @@
 h1,
 a,
 header {
-    color: violet;
+    color: rgb(110, 199, 132);
 }
 
 body {
@@ -17,11 +17,11 @@ body {
     height: auto;
     margin-top: 2em;
     border-radius: 2em;
-    box-shadow: 0 0 3px #FF0000, 0 0 5px #0000FF;
+    box-shadow: 0 0 3px #b44a4a, 0 0 5px #0000FF;
 }
 
 .cat_image:hover {
-    box-shadow: 0 0 3px #e0e3e4, 0 0 5px #b300ff;
+    box-shadow: 0 0 3px #e0e3e4, 0 0 5px #8af0a3;
 }
 
 .cat_title {
@@ -32,7 +32,7 @@ body {
 }
 
 .banner_img {
-    box-shadow: 0 0 3px #FF0000, 0 0 5px #0000FF;
+    box-shadow: 0 0 3px #5da16e, 0 0 5px #5da16e;
 }
 
 

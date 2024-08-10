@@ -16,3 +16,10 @@ class ProductAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('name',)}
 
 admin.site.register(Product, ProductAdmin)
+
+class ReviewAdmin(admin.ModelAdmin):
+    list_display = ['product', 'review', 'rating']
+    list_editable = ['review', 'rating']
+    list_per_page = 20
+
+admin.site.register(Review, ReviewAdmin)

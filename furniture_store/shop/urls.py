@@ -4,6 +4,7 @@ from . import views
 
 urlpatterns = [
     # path('', HomePageView.as_view(), name='home'),
+    path('new_review/<uuid:category_id>/<uuid:product_id>/', add_review, name='add_review'),
     path('', views.prod_list, name='all_products'),
     path('<uuid:category_id>/', views.prod_list, name='products_by_category'),
     path('about/', AboutPageView.as_view(), name='about'),
@@ -12,5 +13,6 @@ urlpatterns = [
     path('search/', SearchProductsListView.as_view(), name='searchResult'),
     path('adv_search/', views.filterview, name='filter_search'),
     path('new/', ProductCreateView.as_view(), name='product_create'),
+
 
 ]
